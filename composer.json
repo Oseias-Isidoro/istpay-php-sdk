@@ -1,0 +1,22 @@
+{
+  "name": "istpay/istpay-php-sdk",
+  "description": "SDK para a REST API da Istpay Bank",
+  "minimum-stability": "stable",
+  "version": "1.0.1",
+  "license": "proprietary",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Istpay Bank",
+      "email": "contato@istpay.com.br"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "IstpaySDK\\SDK\\": "src/"
+    }
+  }
+}
