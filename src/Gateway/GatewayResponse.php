@@ -62,6 +62,26 @@ class GatewayResponse
         return ($this->http_code == 200) ? $this->responseToArray()['order_id'] : null;
     }
 
+    public function isPaid(): bool
+    {
+        return $this->paymentStatus() === Gateway::PAYMENT_STATUS_PAID;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->paymentStatus() === Gateway::PAYMENT_STATUS_PENDING;
+    }
+
+    public function isCanceled(): bool
+    {
+        return $this->paymentStatus() === Gateway::PAYMENT_STATUS_CANCELED;
+    }
+
+    public function isFailed(): bool
+    {
+        return $this->paymentStatus() === Gateway::PAYMENT_STATUS_FAILED;
+    }
+
     public function getErrors(): array
     {
         $response_decoded = $this->responseToArray();
