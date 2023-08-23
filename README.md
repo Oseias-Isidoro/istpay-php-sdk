@@ -81,6 +81,15 @@ echo $response->boletoDueDate(); // retornara NULL
 Gerando uma cobrança no Cartão de credito.
 
 ```php
+// campos a acrecentar
+$istpayGateway->setCardFlag('visa');
+$istpayGateway->setHolder('fulano da silva');
+$istpayGateway->setCvv('123');
+$istpayGateway->setCardHolderDocument('111.222.333-44'); // cpf do titular do cartão
+$istpayGateway->setCardNumber('111 222 3333 4444');
+$istpayGateway->setCardExpiringDate('04/25'); // mm/yy
+$istpayGateway->setInstallments(4); // de 1 a 12
+
 //apenas mude essa linha do codigo acima 
 $response = $istpayGateway->boleto();
 //para 
