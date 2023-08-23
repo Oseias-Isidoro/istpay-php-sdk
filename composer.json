@@ -3,7 +3,6 @@
   "description": "SDK para a REST API da Istpay Bank",
   "minimum-stability": "stable",
   "license": "proprietary",
-  "version": "v1.0.0",
   "type": "library",
   "authors": [
     {
