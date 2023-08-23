@@ -1,20 +1,30 @@
 <?php
+
 namespace IstpaySDK\SDK;
 
-class Istpay
-{
-    private string $token;
+use IstpaySDK\SDK\Gateway\Gateway;
 
-    public function __construct(string $token)
+class Istpay extends Request
+{
+    public function __construct(string $token, string $environment = 'prod')
     {
-        $this->token = $token;
+        parent::__construct($token, $environment);
     }
 
-    /**
-     * @return string
-     */
-    public function getToken(): string
+    public function gateway(): Gateway
     {
-        return $this->token;
+        return new Gateway($this->getToken(), $this->getEnvironment());
+    }
+
+    public function getOrder($orderID)
+    {
+        $response = $this->request('GET', 'orders', [
+            'query' => [
+                'id' => $orderID
+            ]
+        ]);
+
+        return $response->getStatusCode() == 200 ?
+            json_decode($response->getBody())->data->data[0] : $response->getBody();
     }
 }
