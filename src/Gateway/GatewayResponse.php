@@ -92,10 +92,12 @@ class GatewayResponse
             {
                 $this->addMsgError($value[0]);
             }
-        } else if ($this->http_code === 200 and $response_decoded['status'] == Gateway::PAYMENT_ERROR)
+        } else if ($this->http_code === 200)
         {
+            if ($response_decoded['status'] == Gateway::PAYMENT_ERROR) {
                 $this->addMsgError($response_decoded['message']);
-        } else 
+            }
+        } else
         {
             $this->addMsgError($this->getRawResponse());
         }
