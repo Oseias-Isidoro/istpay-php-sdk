@@ -34,6 +34,7 @@ $istpayGateway->setCustomer([
     "email" => 'fulanodasilva@gmail.com',
     "address" => [
         "zipcode" => '0000000',
+        "city" => 'Cidade',
         "street" => 'Rua floresta',
         "number" => '434',
         "district" => 'bairo',
