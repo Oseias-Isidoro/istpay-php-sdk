@@ -9,7 +9,7 @@ class GatewayResponse
 {
     private ResponseInterface $response;
     private int $http_code;
-    private array $errors;
+    private array $errors = [];
 
     public function __construct(ResponseInterface $response)
     {
