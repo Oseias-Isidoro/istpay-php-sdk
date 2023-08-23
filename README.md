@@ -48,7 +48,7 @@ $istpayGateway->setCustomerIP('45.234.1.68');
 
 $response = $istpayGateway->boleto();
 
-echo $response->success(); // TRUE se a cobraça foi gerada com sucesso
+echo $response->success(); // TRUE se a cobrança foi gerada com sucesso
 echo $response->orderID(); // ID da order gerada na Istpay Checkout, retorna NULL em caso de erro 422 (http code error)
 var_dump($response->getErrors()); // Array de erros
 echo $response->paymentCode(); // barcode do boleto
