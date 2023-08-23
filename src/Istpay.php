@@ -2,6 +2,7 @@
 
 namespace IstpaySDK\SDK;
 
+use GuzzleHttp\Exception\GuzzleException;
 use IstpaySDK\SDK\Gateway\Gateway;
 
 class Istpay extends Request
@@ -16,6 +17,9 @@ class Istpay extends Request
         return new Gateway($this->getToken(), $this->getEnvironment());
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function getOrder($orderID)
     {
         $response = $this->request('GET', 'orders', [
