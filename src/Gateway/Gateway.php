@@ -11,6 +11,11 @@ class Gateway extends Request
     const PAYMENT_METHOD_BOLETO = 'ticket';
     const PAYMENT_METHOD_CREDIT_CARD = 'credit_card';
 
+    const PAYMENT_STATUS_PAID = 'paid';
+    const PAYMENT_STATUS_PENDING = 'pending';
+    const PAYMENT_STATUS_CANCELED = 'canceled';
+    const PAYMENT_STATUS_FAILED = 'failed';
+
     const PAYMENT_ERROR = 'error';
     const PAYMENT_SUCCESS = 'success';
 
