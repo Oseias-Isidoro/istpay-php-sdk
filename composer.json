@@ -2,7 +2,7 @@
   "name": "istpay/istpay-php-sdk",
   "description": "SDK para a REST API da Istpay Bank",
   "minimum-stability": "stable",
-  "version": "v1.0.0",
+  "version": "v1.0.0.0",
   "license": "proprietary",
   "type": "library",
   "authors": [
