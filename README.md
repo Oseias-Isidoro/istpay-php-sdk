@@ -12,7 +12,7 @@ Gerando uma cobrança no Boleto.
 ```php
 use IstpaySDK\SDK\Istpay;
 
-$istpay = (new Istpay('token'));
+$istpay = new Istpay('token');
 $istpayGateway = $istpay->gateway();
 
 $istpayGateway->setCart([
