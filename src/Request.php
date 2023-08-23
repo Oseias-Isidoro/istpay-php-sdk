@@ -14,7 +14,7 @@ class Request
     private string $token;
     private string $environment;
 
-    public function __construct(string $token, string $environment = 'prod')
+    public function __construct(string $token, string $environment = Istpay::ENVIRONMENT_PROD)
     {
         $this->token = $token;
         $this->environment = $environment;
@@ -68,7 +68,7 @@ class Request
 
     private function getHost(): string
     {
-        if ($this->environment == 'prod')
+        if ($this->environment == Istpay::ENVIRONMENT_PROD)
             return self::HOST_PROD;
 
         return self::HOST_HML;
