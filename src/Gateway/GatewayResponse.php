@@ -24,8 +24,7 @@ class GatewayResponse
 
     public function success(): bool
     {
-        $response_decoded = $this->responseToArray();
-        return ($this->http_code === 200 and $response_decoded['status'] == Gateway::PAYMENT_SUCCESS);
+        return ($this->http_code === 200 and $this->responseToArray()['status'] == Gateway::PAYMENT_SUCCESS);
     }
 
     public function responseToArray()
@@ -35,50 +34,32 @@ class GatewayResponse
 
     public function paymentCode()
     {
-        if ($this->success())
-            return $this->responseToArray()['payment']['payment_code'];
-
-        return null;
+        return $this->success() ? $this->responseToArray()['payment']['payment_code'] : null;
     }
 
     public function transactionID()
     {
-        if ($this->success())
-                return $this->responseToArray()['payment']['transaction_id'];
-
-        return null;
+        return $this->success() ? $this->responseToArray()['payment']['transaction_id'] : null;
     }
 
     public function boletoPDFLink()
     {
-        if ($this->success())
-            return $this->responseToArray()['payment']['link'];
-
-        return null;
+        return $this->success() ? $this->responseToArray()['payment']['link'] : null;
     }
 
     public function boletoDueDate()
     {
-        if ($this->success())
-            return $this->responseToArray()['payment']['due_date'];
-
-        return null;
+        return $this->success() ? $this->responseToArray()['payment']['due_date'] : null;
     }
 
     public function paymentStatus()
     {
-        if ($this->success())
-            return $this->responseToArray()['payment']['status'];
-
-        return null;
+        return $this->success() ? $this->responseToArray()['payment']['status'] : null;
     }
 
     public function orderID()
     {
-        if ($this->http_code == 200)
-            return $this->responseToArray()['order_id'];
-
-        return null;
+        return ($this->http_code == 200) ? $this->responseToArray()['order_id'] : null;
     }
 
     public function getErrors(): array
