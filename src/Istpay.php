@@ -7,7 +7,10 @@ use IstpaySDK\SDK\Gateway\Gateway;
 
 class Istpay extends Request
 {
-    public function __construct(string $token, string $environment = 'prod')
+    const ENVIRONMENT_PROD = 'prod';
+    const ENVIRONMENT_HML = 'hml';
+
+    public function __construct(string $token, string $environment = self::ENVIRONMENT_PROD)
     {
         parent::__construct($token, $environment);
     }
