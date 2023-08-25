@@ -35,11 +35,11 @@ $istpayGateway->setCustomer([
     "address" => [
         "zipcode" => '0000000',
         "city" => 'Cidade',
-        "street" => 'Rua floresta',
+        "street" => 'Rua',
         "number" => '434',
-        "district" => 'bairo',
+        "district" => 'Bairro',
         "adjunct" => 'sem complemento',
-        "state" => 'PR',
+        "state" => 'Estado',
         "codIbge" => '0000000'
     ]
 ]);
