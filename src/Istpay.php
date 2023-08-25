@@ -4,6 +4,7 @@ namespace IstpaySDK\SDK;
 
 use GuzzleHttp\Exception\GuzzleException;
 use IstpaySDK\SDK\Gateway\Gateway;
+use IstpaySDK\SDK\Withdraw\Withdraw;
 
 class Istpay extends Request
 {
@@ -18,6 +19,11 @@ class Istpay extends Request
     public function gateway(): Gateway
     {
         return new Gateway($this->getToken(), $this->getEnvironment());
+    }
+
+    public function withdraw(): Withdraw
+    {
+        return new Withdraw($this->getToken(), $this->getEnvironment());
     }
 
     /**
