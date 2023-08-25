@@ -72,7 +72,7 @@ $response = $istpayGateway->boleto();
 //para 
 $response = $istpayGateway->pix();
 
-// os method listados aqui são os que mudam seu comportamento quando a cobrança for no pix
+// os metodos listados aqui são os que mudam seu comportamento quando a cobrança for no pix
 echo $response->paymentCode(); // chave pix para pagamento
 echo $response->boletoPDFLink(); // retornara NULL
 echo $response->boletoDueDate(); // retornara NULL
@@ -96,7 +96,7 @@ $response = $istpayGateway->boleto();
 //para 
 $response = $istpayGateway->creditCard();
 
-// os method listados aqui são os que mudam seu comportamento quando a cobrança for no cartão de credito
+// os metodos listados aqui são os que mudam seu comportamento quando a cobrança for no cartão de credito
 echo $response->paymentCode(); // retornara NULL
 echo $response->boletoPDFLink(); // retornara NULL
 echo $response->boletoDueDate(); // retornara NULL
