@@ -2,34 +2,19 @@
 
 namespace IstpaySDK\SDK\Gateway;
 
+use IstpaySDK\SDK\Response;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 
-class GatewayResponse
+class GatewayResponse extends Response
 {
-    private ResponseInterface $response;
-    private int $http_code;
-    private array $errors = [];
-
     public function __construct(ResponseInterface $response)
     {
-        $this->response = $response;
-        $this->http_code = $response->getStatusCode();
-    }
-
-    public function getRawResponse(): StreamInterface
-    {
-        return $this->response->getBody();
+        parent::__construct($response);
     }
 
     public function success(): bool
     {
         return ($this->http_code === 200 and $this->responseToArray()['status'] == Gateway::PAYMENT_SUCCESS);
-    }
-
-    public function responseToArray()
-    {
-        return json_decode($this->response->getBody(), true);
     }
 
     public function paymentCode()
@@ -103,10 +88,5 @@ class GatewayResponse
         }
 
         return $this->errors;
-    }
-
-    private function addMsgError(string $msg)
-    {
-        $this->errors[] = $msg;
     }
 }
