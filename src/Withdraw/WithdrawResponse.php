@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK\Withdraw;
 
 use Psr\Http\Message\ResponseInterface;
@@ -29,7 +31,7 @@ class WithdrawResponse extends \IstpaySDK\SDK\Response
 
         } else if ($this->serverError())
         {
-            $this->addMsgError($this->getRawResponse());
+            $this->addMsgError((string) $this->getRawResponse());
         }
 
         return $this->errors;
