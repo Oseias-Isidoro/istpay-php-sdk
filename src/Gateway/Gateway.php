@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK\Gateway;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -254,6 +256,6 @@ class Gateway extends Request
             ]
         ]);
 
-        return json_decode( $response->getBody(), true );
+        return json_decode((string) $response->getBody(), true );
     }
 }
