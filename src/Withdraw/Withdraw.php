@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK\Withdraw;
 
 use GuzzleHttp\Exception\GuzzleException;
