@@ -101,3 +101,65 @@ echo $response->paymentCode(); // retornara NULL
 echo $response->boletoPDFLink(); // retornara NULL
 echo $response->boletoDueDate(); // retornara NULL
 ```
+___
+# WITHDRAW
+
+* Verificar chave pix
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = new Istpay('token');
+$istpayWithdraw = $istpay->withdraw();
+
+$response = $istpayWithdraw->checkPixKey([
+    'pix_key' => 'chave pix',
+    'type_key' => 'tipo da chave' // document, phoneNumber, email, randomKey, paymentCode
+]);
+
+if ($response->success())
+{
+    $res_obj = $response->responseToObject();
+    echo $res_obj->value;                               // 0,
+    echo $res_obj->typeKey;                             // "cpf",
+    echo $res_obj->destinationAccountOwnerName;         // "Salvatore Strandburg",
+    echo $res_obj->destinationAccountOwnerSocialNumber; // "***.893.450-**",
+    echo $res_obj->destinationAccountOwnerSocialType;   // "individual",
+    echo $res_obj->destinationAccountType;              // "payment",
+    echo $res_obj->destinationBankIspb;                 // "39231527",
+    echo $res_obj->destinationBank;                     // "UNICRED COSTA DO SOL RJ",
+    echo $res_obj->destinationAgency;                   // "3964",
+    echo $res_obj->destinationAccountNumber;            // "6981656148545163",
+    echo $res_obj->active;                              // true
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+* Transferência via PIX
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = new Istpay('token');
+$istpayWithdraw = $istpay->withdraw();
+
+$response = $istpayWithdraw->pixTransfer([
+    'pix_key' => 'chave pix',
+    'type_key' => 'tipo da chave', // document, phoneNumber, email, randomKey, paymentCode
+    'amount' => 5,
+    'internal_identifier' => "user-0001"
+]);
+
+if ($response->success())
+{
+    $res_obj = $response->responseToObject();
+    echo $res_obj->status; 
+    echo $res_obj->amount;
+    echo $res_obj->pix_key;
+    echo $res_obj->key_type;
+    echo $res_obj->transaction_id;
+    echo $res_obj->message;
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
