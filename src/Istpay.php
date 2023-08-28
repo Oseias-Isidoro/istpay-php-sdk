@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -38,6 +40,6 @@ class Istpay extends Request
         ]);
 
         return $response->getStatusCode() == 200 ?
-            json_decode($response->getBody())->data->data[0] : $response->getBody();
+            json_decode((string) $response->getBody())->data->data[0] : $response->getBody();
     }
 }
