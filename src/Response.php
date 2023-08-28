@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK;
 
 use Psr\Http\Message\ResponseInterface;
@@ -29,12 +31,12 @@ abstract class Response
 
     public function responseToArray()
     {
-        return json_decode($this->getRawResponse(), true);
+        return json_decode((string) $this->getRawResponse(), true);
     }
 
     public function responseToObject()
     {
-        return json_decode($this->getRawResponse());
+        return json_decode((string) $this->getRawResponse());
     }
 
     public function clientError(): bool
@@ -59,7 +61,7 @@ abstract class Response
             }
         } else if ($this->serverError())
         {
-            $this->addMsgError($this->getRawResponse());
+            $this->addMsgError((string) $this->getRawResponse());
         }
 
         return $this->errors;
