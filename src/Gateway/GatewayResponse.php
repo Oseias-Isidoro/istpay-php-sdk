@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IstpaySDK\SDK\Gateway;
 
 use IstpaySDK\SDK\Response;
@@ -84,7 +86,7 @@ class GatewayResponse extends Response
             }
         } else
         {
-            $this->addMsgError($this->getRawResponse());
+            $this->addMsgError((string) $this->getRawResponse());
         }
 
         return $this->errors;
