@@ -35,11 +35,11 @@ $istpayGateway->setCustomer([
     "address" => [
         "zipcode" => '0000000',
         "city" => 'Cidade',
-        "street" => 'Rua floresta',
+        "street" => 'Rua',
         "number" => '434',
-        "district" => 'bairo',
+        "district" => 'Bairro',
         "adjunct" => 'sem complemento',
-        "state" => 'PR',
+        "state" => 'Estado',
         "codIbge" => '0000000'
     ]
 ]);
@@ -50,7 +50,7 @@ $istpayGateway->setCustomerIP('45.234.1.68');
 $response = $istpayGateway->boleto();
 
 echo $response->success(); // TRUE se a cobrança foi gerada com sucesso
-echo $response->orderID(); // ID da order gerada na Istpay Checkout, retorna NULL em caso de erro 422 (http code error)
+echo $response->orderID(); // ID da ordem gerada na Istpay Checkout, retorna NULL em caso de erro 422 (http code error)
 var_dump($response->getErrors()); // Array de erros
 echo $response->paymentCode(); // barcode do boleto
 echo $response->paymentStatus(); // status da cobrança, pode ser 'paid', 'pending', 'canceled' ou 'failed', em caso de erro 422 retornara  NULL
@@ -72,7 +72,7 @@ $response = $istpayGateway->boleto();
 //para 
 $response = $istpayGateway->pix();
 
-// os method listados aqui são os que mudam seu comportamento quando a cobrança for no pix
+// os metodos listados aqui são os que mudam seu comportamento quando a cobrança for no pix
 echo $response->paymentCode(); // chave pix para pagamento
 echo $response->boletoPDFLink(); // retornara NULL
 echo $response->boletoDueDate(); // retornara NULL
@@ -96,7 +96,7 @@ $response = $istpayGateway->boleto();
 //para 
 $response = $istpayGateway->creditCard();
 
-// os method listados aqui são os que mudam seu comportamento quando a cobrança for no cartão de credito
+// os metodos listados aqui são os que mudam seu comportamento quando a cobrança for no cartão de credito
 echo $response->paymentCode(); // retornara NULL
 echo $response->boletoPDFLink(); // retornara NULL
 echo $response->boletoDueDate(); // retornara NULL
