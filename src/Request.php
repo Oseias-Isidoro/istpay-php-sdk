@@ -49,7 +49,7 @@ class Request
     /**
      * @throws GuzzleException
      */
-    protected function request(string $method, string $uri, array $data): ResponseInterface
+    protected function request(string $method, string $uri, array $data = []): ResponseInterface
     {
         $client = new Client([
             'base_uri' => $this->getHost(),
