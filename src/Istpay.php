@@ -4,8 +4,21 @@ declare(strict_types=1);
 
 namespace IstpaySDK\SDK;
 
-use GuzzleHttp\Exception\GuzzleException;
+use IstpaySDK\SDK\AbandonedCart\AbandonedCard;
+use IstpaySDK\SDK\BuyButtons\BuyButtons;
+use IstpaySDK\SDK\Customers\Customers;
+use IstpaySDK\SDK\Dashboard\Dashboard;
+use IstpaySDK\SDK\Discounts\Discounts;
 use IstpaySDK\SDK\Gateway\Gateway;
+use IstpaySDK\SDK\Notifications\Notifications;
+use IstpaySDK\SDK\OrderBumps\OrderBumps;
+use IstpaySDK\SDK\Orders\Orders;
+use IstpaySDK\SDK\Payments\Payments;
+use IstpaySDK\SDK\Pixels\Pixels;
+use IstpaySDK\SDK\Products\Products;
+use IstpaySDK\SDK\ShippingOptions\ShippingOptions;
+use IstpaySDK\SDK\Shop\Shop;
+use IstpaySDK\SDK\UserDevices\UserDevices;
 use IstpaySDK\SDK\Withdraw\Withdraw;
 
 class Istpay extends Request
@@ -28,18 +41,73 @@ class Istpay extends Request
         return new Withdraw($this->getToken(), $this->getEnvironment());
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function getOrder($orderID)
+    public function shop(): Shop
     {
-        $response = $this->request('GET', 'orders', [
-            'query' => [
-                'id' => $orderID
-            ]
-        ]);
+        return new Shop($this->getToken(), $this->getEnvironment());
+    }
 
-        return $response->getStatusCode() == 200 ?
-            json_decode((string) $response->getBody())->data->data[0] : $response->getBody();
+    public function dashboard(): Dashboard
+    {
+        return new Dashboard($this->getToken(), $this->getEnvironment());
+    }
+
+    public function orderBumps(): OrderBumps
+    {
+        return new OrderBumps($this->getToken(), $this->getEnvironment());
+    }
+
+    public function pixels(): Pixels
+    {
+        return new Pixels($this->getToken(), $this->getEnvironment());
+    }
+
+    public function discounts(): Discounts
+    {
+        return new Discounts($this->getToken(), $this->getEnvironment());
+    }
+
+    public function buyButtons(): BuyButtons
+    {
+        return new BuyButtons($this->getToken(), $this->getEnvironment());
+    }
+
+    public function customers(): Customers
+    {
+        return new Customers($this->getToken(), $this->getEnvironment());
+    }
+
+    public function orders(): Orders
+    {
+        return new Orders($this->getToken(), $this->getEnvironment());
+    }
+
+    public function products(): Products
+    {
+        return new Products($this->getToken(), $this->getEnvironment());
+    }
+
+    public function abandonedCart(): AbandonedCard
+    {
+        return new AbandonedCard($this->getToken(), $this->getEnvironment());
+    }
+
+    public function payments(): Payments
+    {
+        return new Payments($this->getToken(), $this->getEnvironment());
+    }
+
+    public function shippingOptions(): ShippingOptions
+    {
+        return new ShippingOptions($this->getToken(), $this->getEnvironment());
+    }
+
+    public function userDevices(): UserDevices
+    {
+        return new UserDevices($this->getToken(), $this->getEnvironment());
+    }
+
+    public function notifications(): Notifications
+    {
+        return new Notifications($this->getToken(), $this->getEnvironment());
     }
 }
