@@ -7,7 +7,7 @@ namespace IstpaySDK\SDK;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-abstract class Response
+class Response
 {
     protected ResponseInterface $response;
     public int $http_code;
