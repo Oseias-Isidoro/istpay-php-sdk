@@ -20,11 +20,10 @@ class OrderBumps extends \IstpaySDK\SDK\Request
      */
     public function get($shop_id, array $data = []): Response
     {
+        $data['shop_id'] = $shop_id;
+
         return new Response($this->request('GET','order-bumps', [
-            'query' => [
-                'shop_id' => $shop_id,
-                ...$data
-            ]
+            'query' => $data
         ]));
     }
 }

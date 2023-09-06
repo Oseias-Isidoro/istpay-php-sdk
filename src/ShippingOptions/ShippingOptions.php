@@ -19,12 +19,12 @@ class ShippingOptions extends \IstpaySDK\SDK\Request
     /**
      * @throws GuzzleException
      */
-    public function get(array $options = []): Response
+    public function get($shop_id, array $options = []): Response
     {
+        $options['shop_id'] = $shop_id;
+
         return new Response($this->request('GET','shipping-options', [
-            'query' => [
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 }

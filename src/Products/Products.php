@@ -25,9 +25,7 @@ class Products extends \IstpaySDK\SDK\Request
     public function get(array $options = []): Response
     {
         return new Response($this->request('GET','products', [
-            'query' => [
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 
@@ -37,9 +35,7 @@ class Products extends \IstpaySDK\SDK\Request
     public function create(array $data): Response
     {
         return new Response($this->request('POST','products', [
-            'form_params' => [
-                ...$data
-            ]
+            'form_params' => $data
         ]));
     }
 
@@ -49,9 +45,7 @@ class Products extends \IstpaySDK\SDK\Request
     public function update($product_id, array $data): Response
     {
         return new Response($this->request('PUT',"products/$product_id", [
-            'form_params' => [
-                ...$data
-            ]
+            'form_params' => $data
         ]));
     }
 

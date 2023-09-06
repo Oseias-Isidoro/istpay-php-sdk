@@ -22,9 +22,7 @@ class AbandonedCard extends \IstpaySDK\SDK\Request
     public function get(array $options = []): Response
     {
         return new Response($this->request('GET','abandoned-carts', [
-            'query' => [
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 }

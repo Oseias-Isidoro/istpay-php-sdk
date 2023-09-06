@@ -21,11 +21,10 @@ class Discounts extends \IstpaySDK\SDK\Request
      */
     public function get($shop_id, array $options = []): Response
     {
+        $options['shop_id'] = $shop_id;
+
         return new Response($this->request('GET','discounts', [
-            'query' => [
-                'shop_id' => $shop_id,
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 
@@ -34,11 +33,10 @@ class Discounts extends \IstpaySDK\SDK\Request
      */
     public function validateCoupon($shop_id, array $options = []): Response
     {
-        return new Response($this->request('POST','discounts', [
-            'form_params' => [
-                'shop_id' => $shop_id,
-                ...$options
-            ]
+        $options['shop_id'] = $shop_id;
+
+        return new Response($this->request('POST','discounts/validateCoupon', [
+            'form_params' => $options
         ]));
     }
 }

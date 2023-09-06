@@ -62,10 +62,13 @@ class Request
             'Accept'        => 'application/json',
         ];
 
-        return $client->request($method, $uri, [
+        $options = [
             'headers' => $headers,
-            ...$data
-        ]);
+        ];
+
+        $options = array_merge($options, $data);
+
+        return $client->request($method, $uri, $options);
     }
 
     private function getHost(): string

@@ -21,11 +21,10 @@ class BuyButtons extends \IstpaySDK\SDK\Request
      */
     public function get($shop_id, array $options = []): Response
     {
+        $options['shop_id'] = $shop_id;
+
         return new Response($this->request('GET','buy-buttons', [
-            'query' => [
-                'shop_id' => $shop_id,
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 }

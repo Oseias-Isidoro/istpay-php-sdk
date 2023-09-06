@@ -22,9 +22,7 @@ class Orders extends \IstpaySDK\SDK\Request
     public function get(array $options = []): Response
     {
         return new Response($this->request('GET','orders', [
-            'query' => [
-                ...$options
-            ]
+            'query' => $options
         ]));
     }
 }
