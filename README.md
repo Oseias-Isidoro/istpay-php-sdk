@@ -163,3 +163,431 @@ if ($response->success())
 }
 ```
 
+# Demais endpoints
+
+### Carrinho Abandonado
+
+* Listar carrinhos abandonados por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->abandonedCart();
+
+$response = $istpay->get();
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+
+```
+
+### Buy Buttons
+
+* Listar botões de compra por shop id
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->buyButtons();
+
+$response = $istpay->get(
+    123, //shop_id
+    [
+        'product_ids' => [1, 2, 3] // opcional
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+
+```
+### Customers
+
+* Listar clientes por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->customers();
+
+$response = $istpay->get(
+    [
+        'id' => 12, // opcional
+        'name' => 'fulano da silva', // opcional
+        'email' => 'fulanodasilva@gmail.com', // opcional
+        'document' => '111.222.333-44' // opcional
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+### Dashboard
+
+* Listar dados dashboard do shop via token
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->dashboard();
+
+$response = $istpay->get(
+    'shop_token',
+    '01/01/2022',
+    '01/01/2023',
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+### Discounts
+
+* Listar descontos por shop id
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->discounts();
+
+$response = $istpay->get(
+    123, // shop_id
+    [
+        'product_id' => 123, // opcional
+        'payment_method' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_METHOD_PIX, // pix|boleto|credit_Cart - opcional
+        'automatic_apply' => 1, // opcional
+        'newsletter_abandoned_carts' => 1, // opcional
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+* Validar desconto via cupom
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->discounts();
+
+$response = $istpay->validateCoupon(
+    123, // shop_id
+    [
+        'code' => 'OIVCGC74F',
+        'total_order' => 100,
+        'email_customer' => "fulanodasilva@gmail.com",
+        'payment_method' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_METHOD_PIX, //pix|boleto|credit_Cart
+        'product_ids' => "999,1000",
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Notifications
+
+* Listar notificações por shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->notifications();
+
+$response = $istpay->list('shop_token');
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Order Bumps
+
+* Listar order bumps por shop id
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->orderBumps();
+
+$response = $istpay->get(
+    123, // shop_id
+    [
+        'product_id' => 10471, // opcinal
+        'products_ids' => '10471,5435', // opcinal
+        'rules_to_show' => 'always', // opcinal
+        'values_rules_to_show' => '>100', // opcinal
+        'payment_method' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_METHOD_CREDIT_CARD, //pix|boleto|credit_Cart - opcinal
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Orders
+
+* Listar pedidos por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->orders();
+
+$response = $istpay->get([
+        'id' => 10471, // opcinal
+        'start_date' => '01/01/2023', // opcinal
+        'end_date' => '01/09/2023', // opcinal
+        'product' => 343, // opcinal
+        'customer' => 455, // opcinal
+        'external_identification' => '2dc0204d-4971-4bf3-a1e8-13c8fnf65sp784ce55', // opcinal
+        'payment_method' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_METHOD_CREDIT_CARD, //pix|boleto|credit_Cart - opcinal
+    ]);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Payments
+
+* Listar pagamentos pedidos por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->payments();
+
+$response = $istpay->get([
+        'order_id' => 10471, // opcinal
+        'status' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_STATUS_PAID, // paid|failed|pending|canceled - opcional
+        'method' => \IstpaySDK\SDK\Gateway\Gateway::PAYMENT_METHOD_CREDIT_CARD, //pix|boleto|credit_Cart - opcional
+    ]);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Pixels
+
+* Listar pixels por shop id
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->pixels();
+
+$response = $istpay->get(
+    5 // shop_id
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Shipping Options
+
+* Listar opções de frete por shop id
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->shippingOptions();
+
+$response = $istpay->get(
+    5, // shop_id
+    [
+        'total_amount_items_order' => 100, // opcional
+        'product_ids' => '1,2,3', // opcional
+        'states' => 'PR', // opcional
+    ]   
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Shop
+
+* Listar dados do shop via token
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->shop();
+
+$response = $istpay->get();
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+### User Devices
+
+* Listar dispositivos registrados  por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->userDevices();
+
+$response = $istpay->list('shop_token');
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+* Registrar novo dispositivo  por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->userDevices();
+
+$response = $istpay->store(
+    'shop_token',
+    'device_id'
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+### Products
+
+* Criar produto digital por shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->products();
+
+$response = $istpay->create([
+    'title' => 'auto test',
+    'description' => 'description auto test',
+    'price' => 10.5,
+    'redirect_url_card' => 'url',
+    'type' => Products::TYPE_DIGITAL,
+]);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+* Criar produto digital por shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->products();
+
+$response = $istpay->update(
+    3423, // product_id
+    [
+        'title' => 'auto test',
+        'description' => 'description auto test',
+        'price' => 10.5,
+        'redirect_url_card' => 'url',
+        'type' => Products::TYPE_DIGITAL,
+    ]
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+* Deletar produto digital por shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->products();
+
+$response = $istpay->delete(
+    3423, // product_id
+);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
+
+* Listar produtos por Shop
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->products();
+
+$response = $istpay->get([
+    'id' => 123, //product_id - opcional
+    'title' => 'product title', // opcional
+]);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
