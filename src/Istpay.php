@@ -10,6 +10,7 @@ use IstpaySDK\SDK\Customers\Customers;
 use IstpaySDK\SDK\Dashboard\Dashboard;
 use IstpaySDK\SDK\Discounts\Discounts;
 use IstpaySDK\SDK\Gateway\Gateway;
+use IstpaySDK\SDK\Integrations\Integrations;
 use IstpaySDK\SDK\Notifications\Notifications;
 use IstpaySDK\SDK\OrderBumps\OrderBumps;
 use IstpaySDK\SDK\Orders\Orders;
@@ -109,5 +110,10 @@ class Istpay extends Request
     public function notifications(): Notifications
     {
         return new Notifications($this->getToken(), $this->getEnvironment());
+    }
+
+    public function integrations(): Integrations
+    {
+        return new Integrations($this->getToken(), $this->getEnvironment());
     }
 }
