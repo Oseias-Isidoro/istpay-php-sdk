@@ -591,3 +591,27 @@ if ($response->success())
     var_dump($response->getErrors()); // array de erros
 }
 ```
+
+### Integrações
+
+* Integrar com o WooCommerce
+
+```php
+use IstpaySDK\SDK\Istpay;
+
+$istpay = (new Istpay('token'))->integrations();
+
+$response = $istpay->woo_integration([
+    "woo_url_store" => "www.myshop.com",
+    "woo_consumer_key" => "ck_47549572a85fdbf8d4a82b85gfd877d4d7d4e2da",
+    "woo_consumer_secret" => "cs_f5167a95f9ce7ecb62fhgd6c193f758052554df2",
+    "allow_woo_cart" => false
+]);
+
+if ($response->success())
+{
+    var_dump($response->responseToArray());
+} else {
+    var_dump($response->getErrors()); // array de erros
+}
+```
